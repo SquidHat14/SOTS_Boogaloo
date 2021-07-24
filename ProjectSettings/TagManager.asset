@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - FallThroughPlatform
+  - JumpThroughPlatform
+  - JumpAndFallThroughPlatform
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Player
+  - Ground & Ceiling
+  - Destructable
+  - Pickupable
+  - Enemy
+  - Hitbox
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3614858341
+    locked: 0
+  - name: Background - Close
+    uniqueID: 2075462977
+    locked: 0
+  - name: Obstacles
+    uniqueID: 1797503493
+    locked: 0
+  - name: Enemies
+    uniqueID: 2429728533
+    locked: 0
+  - name: Player
+    uniqueID: 4202084211
+    locked: 0
+  - name: Foreground
+    uniqueID: 2920473079
+    locked: 0
+  - name: Foreground - Close
+    uniqueID: 1565030317
+    locked: 0
+  - name: UI
+    uniqueID: 2706120493
+    locked: 0
