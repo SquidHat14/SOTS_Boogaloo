@@ -51,12 +51,19 @@ public class CharacterMovement : MonoBehaviour
             velocity.y = 0;
             coyoteTimeCurrentFrame = 0;
             alreadyJumped = false;
+            animate.ResetTrigger("Jump");
+            animate.SetBool("Grounded", true);
+        }
+        else
+        {
+            animate.SetBool("Grounded", false);
         }
 
         if (holdingJump && (controller.collisions.below || (coyoteTimeCurrentFrame < coyoteTimeFrameLimit && alreadyJumped == false)))
         {
             velocity.y = jumpVelocity;
             alreadyJumped = true;
+            animate.SetTrigger("Jump");
         }
 
         if (!holdingJump && !controller.collisions.below && velocity.y > minJumpVelocity)
@@ -87,6 +94,7 @@ public class CharacterMovement : MonoBehaviour
         }
         
         animate.SetInteger("xSpeed", (int) velocity.x);
+        animate.SetInteger("ySpeed", (int) velocity.y);
     }
 
 

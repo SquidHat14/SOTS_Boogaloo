@@ -12,7 +12,6 @@ public class PhysicsController : RaycastController
         UpdateRaycastOrigins();
 
 		collisions.Reset();
-		collisions.moveAmountOld = move;
 
         if (move.x != 0)
 		{
@@ -50,7 +49,7 @@ public class PhysicsController : RaycastController
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
 
-            Debug.DrawRay(rayOrigin, Vector2.right * directionX, Color.red);
+            Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
 
             if(hit)
             {
@@ -81,7 +80,7 @@ public class PhysicsController : RaycastController
             
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, directionY * Vector2.up, rayLength, collisionMask);
 
-            Debug.DrawRay(rayOrigin, Vector2.up * directionY, Color.red);
+            Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
 
             if (hit)
             {
@@ -101,6 +100,36 @@ public class PhysicsController : RaycastController
         }
     }
 
+    public bool ProjectMovement(Vector2 move, bool standingOnPlatform)
+    {
+        float directionY = Mathf.Sign(move.y);
+        float colliderSize = collider.size.x * collider.transform.localScale.x;
+        float rayLength = Mathf.Abs(move.y) + skinWidth;
+
+        bool ProjectedOnGround = false;
+
+        for(int i = 0; i < verticalRayCount; i++)
+        {
+            Vector2 rayOrigin = raycastOrigins.bottomLeft;
+
+            rayOrigin += Vector2.right * (verticalRaySpacing * i + move.x);
+
+            rayOrigin += new Vector2(colliderSize, 0);
+
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, directionY * Vector2.up, rayLength, collisionMask);
+
+            Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.blue);
+
+            if (hit)
+            {
+                rayLength = hit.distance;
+                ProjectedOnGround = true;
+            }
+        }
+
+        return ProjectedOnGround;
+    }
+    
     public void CheckIfOnOneWayPlatform(ref Vector3 move)
     {
         float rayLength = 0.5f + skinWidth;
@@ -142,7 +171,6 @@ public class PhysicsController : RaycastController
 		public bool above, below;
 		public bool left, right;
 
-		public Vector2 moveAmountOld;
 		public int faceDir;
 		public bool fallingThroughPlatform;
 

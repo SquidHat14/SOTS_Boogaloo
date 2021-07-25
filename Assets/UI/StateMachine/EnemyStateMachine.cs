@@ -7,6 +7,7 @@ public class EnemyStateMachine: StateMachine
     [HideInInspector]
     public GameObject player;
 
+
     //Enemy UI Stuff
 
     void Awake()

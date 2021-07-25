@@ -13,7 +13,6 @@ public abstract class StateMachine: MonoBehaviour
 
         CurrentState = state;
         StartCoroutine(CurrentState.EnterState());
-        //StartCoroutine(CurrentState.UpdateState());
     }
 
     public void startUpdate()

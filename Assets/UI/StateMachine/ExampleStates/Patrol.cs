@@ -6,8 +6,8 @@ using UnityEngine;
 public class Patrol: State
 {
     EnemyStateMachine enemySM;
-
     AIMovement enemyAI;
+
 
     public Patrol(EnemyStateMachine esm)
     {
@@ -17,7 +17,7 @@ public class Patrol: State
 
     public override IEnumerator EnterState()
     {
-        yield return new WaitForSeconds(1);
+        yield return null;
         enemyAI.setDirection(1);
         enemySM.startUpdate();
         yield break;
@@ -26,11 +26,13 @@ public class Patrol: State
     public override IEnumerator UpdateState()
     {   
         while(true)
-        {
-            if(enemyAI.controller.collisions.left || enemyAI.controller.collisions.right)
+        {  
+            enemyAI.NextFrame();
+            
+            if((enemyAI.controller.collisions.left || enemyAI.controller.collisions.right) 
+            || (enemyAI.controller.collisions.below && !enemyAI.controller.ProjectMovement(enemyAI.velocity * Time.deltaTime, false)))
             {
                 enemyAI.turnAround();
-                yield return new WaitForSeconds(1);
             }
             yield return null;
         }

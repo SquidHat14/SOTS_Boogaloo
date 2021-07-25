@@ -17,18 +17,21 @@ public class GeneralHurtbox : MonoBehaviour
 
     private SpriteRenderer sprite;
 
+    private Rigidbody2D rigidbody2D;
+
     protected void Setup()
     {
         collider = GetComponent<BoxCollider2D>();
         animate = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     public virtual void GetHit(float damage, float hitPositionX, float KbSpeed = 0, bool crit = false)
     {
         if(Knockbackable)
         {
-            float hitDirection = collider.bounds.center.x > hitPositionX ? -1 : 1;
+            float hitDirection = collider.bounds.center.x > hitPositionX ? 1 : -1;
             Knockback(hitDirection, KbSpeed == 0 ? KnockBackSpeed : KbSpeed);
         }
 
@@ -40,7 +43,7 @@ public class GeneralHurtbox : MonoBehaviour
             }
             catch
             {
-                Debug.LogError("Enemy does not have animator set correctly");
+                Debug.Log("Enemy does not have animator set correctly");
             }
 
             sprite.color = Color.red;
@@ -57,14 +60,15 @@ public class GeneralHurtbox : MonoBehaviour
     protected virtual void Die()
     {
         Unhittable = true;
+        Knockbackable = false;
         try
         {
             animate.SetTrigger("Die");
         }
         catch
         {
-            Debug.LogError("Enemy does not have animator set correctly");
-            Destroy(rootObject);
+            Debug.Log("Enemy does not have animator set correctly");
+            DestroyAfterDeathAnim();
         }
         //WILL CALL DESTROY AT END OF ANIMATION IF SETUP CORRECTLY
     }
@@ -72,8 +76,14 @@ public class GeneralHurtbox : MonoBehaviour
     protected virtual void Knockback(float direction, float speed)
     {
         Debug.Log("HITTING KNOCKBACK ON SOMETHING");
+        rigidbody2D.velocity += new Vector2(direction * speed, speed / 4);
+        Invoke("resetRBVelocity", .15f);
     }
 
+    private void resetRBVelocity()
+    {
+        rigidbody2D.velocity = new Vector2(0,0);
+    }
     private void finishHitAnimation()
     {
         animate.ResetTrigger("GotHit");

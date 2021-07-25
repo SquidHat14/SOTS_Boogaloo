@@ -8,9 +8,6 @@ public class AIMovement: MonoBehaviour {
   public float accelerationTimeGrounded = .18f;
   public float moveSpeed = 4;
 
-  [Range(0, 15)]
-  public int coyoteTimeFrameLimit = 3;
-  private int coyoteTimeCurrentFrame = 0;
   public float gravity;
   public float jumpVelocity;
 
@@ -19,57 +16,45 @@ public class AIMovement: MonoBehaviour {
   public Animator animate;
   public float velocityXSmoothing;
 
-  private bool holdingJump;
-  private int moveDirection;
-  private bool alreadyJumped = true;
-  private bool inCustcene = false;
+  public int moveDirection;
 
   [HideInInspector]
   public PhysicsController controller;
   float Xscale;
 
-  void Awake() {
-    controller = GetComponent <PhysicsController> ();
+  void Awake() 
+  {
+    controller = GetComponent<PhysicsController>();
     Xscale = this.gameObject.transform.localScale.x;
   }
 
-  void FixedUpdate() {
-    float targetVelocityX = moveDirection * moveSpeed;
-
-    if (controller.collisions.above) {
+  public void NextFrame() 
+  {
+    if (controller.collisions.above) 
+    {
       velocity.y = 0;
     }
-    if (controller.collisions.below) {
+    if (controller.collisions.below) 
+    {
       velocity.y = 0;
-      coyoteTimeCurrentFrame = 0;
-      alreadyJumped = false;
     }
 
-    if (holdingJump && (controller.collisions.below || (coyoteTimeCurrentFrame < coyoteTimeFrameLimit && alreadyJumped == false))) {
-      velocity.y = jumpVelocity;
-      alreadyJumped = true;
-    }
-    coyoteTimeCurrentFrame++;
-    velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded: accelerationTimeAirborne);
+    velocity.x = moveDirection * moveSpeed;
 
     velocity.y += gravity * Time.deltaTime;
 
     controller.Move(velocity * Time.deltaTime);
-
-    holdingJump = false;
   }
 
-  public void Jump() {
-    holdingJump = true;
-  }
-
-  public void setDirection(int direction) {
+  public void setDirection(int direction)
+  {
     moveDirection = direction;
     flipSprite(direction);
   }
 
   public void turnAround()
   {
+    Debug.Log("Turning Around Now");
     moveDirection *= -1;
     flipSprite(moveDirection);
   }
@@ -81,6 +66,4 @@ public class AIMovement: MonoBehaviour {
         this.gameObject.transform.localScale = new Vector2(Xscale * direction, transform.localScale.y);
     }
   }
-
-  //TO DO : get collision data as a given Vector 2.  Will be used to determine when to jump vs turn around and platform patrol.
 }
