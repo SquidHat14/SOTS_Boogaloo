@@ -20,6 +20,9 @@ TextureImporter:
   - first:
       213: 7246461610705486414
     second: Elf_Girl_Attack-sheet_5
+  - first:
+      213: 371998668649820664
+    second: Elf_Girl_Attack-sheet_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -242,6 +245,27 @@ TextureImporter:
       bones: []
       spriteID: e420b98017a909460800000000000000
       internalID: 7246461610705486414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elf_Girl_Attack-sheet_6
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 40
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f17ac571da992500800000000000000
+      internalID: 371998668649820664
       vertices: []
       indices: 
       edges: []

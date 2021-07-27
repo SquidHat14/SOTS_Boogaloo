@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Anim_Elf_Girl_Attack
+  m_Name: Anim_Elf_Girl_Attack_2
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,16 +20,16 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 3222711775617934395, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9,
+      value: {fileID: -642219762928809168, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9,
         type: 3}
     - time: 0.09090909
-      value: {fileID: -7215462692528977653, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9,
+      value: {fileID: 8146947171053037924, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9,
         type: 3}
     - time: 0.18181819
-      value: {fileID: 1956376746415998786, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9,
+      value: {fileID: 7246461610705486414, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9,
         type: 3}
     - time: 0.27272728
-      value: {fileID: -642219762928809168, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9,
+      value: {fileID: 371998668649820664, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9,
         type: 3}
     attribute: m_Sprite
     path: 
@@ -50,10 +50,10 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 3222711775617934395, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9, type: 3}
-    - {fileID: -7215462692528977653, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9, type: 3}
-    - {fileID: 1956376746415998786, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9, type: 3}
     - {fileID: -642219762928809168, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9, type: 3}
+    - {fileID: 8146947171053037924, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9, type: 3}
+    - {fileID: 7246461610705486414, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9, type: 3}
+    - {fileID: 371998668649820664, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -79,16 +79,9 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.09090909
-    functionName: ActivateHitbox
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.36363637
+  - time: 0.27272728
     functionName: AttackFinished
-    data: Attacking
+    data: Attack2
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
