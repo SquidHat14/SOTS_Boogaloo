@@ -14,10 +14,12 @@ public class CharacterAttack : MonoBehaviour
     void Start()
     {
         animate = GetComponent<Animator>();
+
         if(!hitBox)
         {
             Debug.LogError("Attack Needs a Hitbox");
         }
+        
         pHB = hitBox.transform.gameObject.GetComponent<PlayerHitbox>();
         DisableHitbox();
     }
@@ -28,21 +30,16 @@ public class CharacterAttack : MonoBehaviour
         {
             StartFirstAttack();
         }
-
-        if(attackInput2 && animate.GetBool("Attacking") == false)
-        {
-            StartSecondAttack();
-        }
     }
 
     void Update()
     {
-        if(!attackInput)
+        if(!attackInput && !attackInput2)
         {
             attackInput = Input.GetKeyDown("j");
         }
 
-        if(!attackInput2 && acceptingAttackInput2)
+        if(!attackInput && !attackInput2 && acceptingAttackInput2)
         {
             attackInput2 = Input.GetKeyDown("j");
         }
@@ -50,6 +47,7 @@ public class CharacterAttack : MonoBehaviour
 
     public void StartFirstAttack()
     {
+        acceptingAttackInput2 = false;
         attackInput = false;
         animate.SetBool("Attacking", true);
     }
@@ -61,9 +59,12 @@ public class CharacterAttack : MonoBehaviour
 
     public void StartSecondAttack()
     {
-        attackInput2 = false;
+        if(!attackInput2) return;
+
         animate.SetBool("Attack2", true);
         //TO DO - Modify hitbox to make it larger and do more damage
+        attackInput2 = false;
+        acceptingAttackInput2 = false;
     }
 
      void AttackFinished(string animatorCondition)
@@ -71,7 +72,6 @@ public class CharacterAttack : MonoBehaviour
         DisableHitbox();
         animate.SetBool(animatorCondition, false);
         pHB.AttackFinished();  //Clears list of hit targets so 1 attack cant hit multiple times on the same enemy
-        acceptingAttackInput2 = false;
     }
 
     void ActivateHitbox()

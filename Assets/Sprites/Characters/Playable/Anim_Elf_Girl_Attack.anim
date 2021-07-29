@@ -28,9 +28,6 @@ AnimationClip:
     - time: 0.18181819
       value: {fileID: 1956376746415998786, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9,
         type: 3}
-    - time: 0.27272728
-      value: {fileID: -642219762928809168, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9,
-        type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -53,13 +50,12 @@ AnimationClip:
     - {fileID: 3222711775617934395, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9, type: 3}
     - {fileID: -7215462692528977653, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9, type: 3}
     - {fileID: 1956376746415998786, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9, type: 3}
-    - {fileID: -642219762928809168, guid: 31306b2a1c0cb6e4a9136c9a3c06b6e9, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.36363637
+    m_StopTime: 0.27272728
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -86,7 +82,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.36363637
+  - time: 0.09090909
+    functionName: LookForSecondAttackInput
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.27272728
     functionName: AttackFinished
     data: Attacking
     objectReferenceParameter: {fileID: 0}

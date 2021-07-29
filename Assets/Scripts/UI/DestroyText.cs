@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageText : MonoBehaviour
+public class DestroyText : MonoBehaviour
 {
     private void DESTROY_TEXT()
     {

@@ -1,11 +1,13 @@
 using UnityEngine;
 using TMPro;
 
-public class DamageUIManager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
-    public static DamageUIManager Instance;
+    public static UIManager Instance;
 
     public GameObject damageTextPrefab;
+    public GameObject moneyTextPrefab;
+    public GameObject healthTextPrefab;
 
     private void Awake() 
     {
@@ -30,5 +32,19 @@ public class DamageUIManager : MonoBehaviour
     {
         GameObject DamageTextInstance = Instantiate(damageTextPrefab, transform);
         DamageTextInstance.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(damage.ToString());
+    }
+
+    public void DisplayMoneyPickup(Vector3 position, float value)
+    {
+        GameObject MoneyTextInstance = Instantiate(moneyTextPrefab);
+        MoneyTextInstance.transform.GetChild(0).GetComponent<TextMeshPro>().SetText("+ " + value.ToString());
+        MoneyTextInstance.transform.position = position;
+    }
+
+    public void DisplayHealthPickup(Vector3 position, float value)
+    {
+        GameObject HealthTextInstance = Instantiate(healthTextPrefab);
+        HealthTextInstance.transform.GetChild(0).GetComponent<TextMeshPro>().SetText("+ " + value.ToString());
+        HealthTextInstance.transform.position = position;
     }
 }

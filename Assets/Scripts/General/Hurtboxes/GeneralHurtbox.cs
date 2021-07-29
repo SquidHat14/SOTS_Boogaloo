@@ -54,7 +54,7 @@ public class GeneralHurtbox : MonoBehaviour
 
     protected virtual void TakeDamage(float damage, bool crit)
     {
-        DamageUIManager.Instance.DisplayDamage(transform.position, damage, crit);
+        UIManager.Instance.DisplayDamage(transform.position, damage, crit);
     }
 
     protected virtual void Die()
