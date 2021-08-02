@@ -33,7 +33,7 @@ public class GeneralHitbox : MonoBehaviour
     {
         if(CheckIfHittable(col))
         {
-            col.GetComponent<GeneralHurtbox>().GetHit(0, collider.bounds.center.x);
+            //col.GetComponent<GeneralHurtbox>().GetHit(0, collider.bounds.center.x);
         }
 
         hitCols.Add(col);

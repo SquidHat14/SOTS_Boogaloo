@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour
@@ -8,6 +9,12 @@ public class UIManager : MonoBehaviour
     public GameObject damageTextPrefab;
     public GameObject moneyTextPrefab;
     public GameObject healthTextPrefab;
+
+    public GameObject damageCritTextPrefab;
+
+    public Slider slider;
+
+    public TextMeshProUGUI moneyText;
 
     private void Awake() 
     {
@@ -21,17 +28,36 @@ public class UIManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void DisplayDamage(Vector3 position, float damage, bool crit = false) //Stay in place
+    public void DisplayDamage(Vector3 position, float damage, bool crit) //Stay in place
     {
-        GameObject DamageTextInstance = Instantiate(damageTextPrefab);
-        DamageTextInstance.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(damage.ToString());
+        GameObject DamageTextInstance;
+        if(crit)
+        {
+            DamageTextInstance = Instantiate(damageCritTextPrefab);
+        }
+        else
+        {
+            DamageTextInstance = Instantiate(damageTextPrefab);
+        }
+        TextMeshPro damageText = DamageTextInstance.transform.GetChild(0).GetComponent<TextMeshPro>();
+        damageText.SetText(damage.ToString());
         DamageTextInstance.transform.position = position;
     }
 
-    public void DisplayDamage(Transform transform, float damage, bool crit = false) //Follow hit object
+    public void DisplayDamage(Transform transform, float damage, bool crit) //Follow hit object
     {
-        GameObject DamageTextInstance = Instantiate(damageTextPrefab, transform);
-        DamageTextInstance.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(damage.ToString());
+        GameObject DamageTextInstance;
+
+        if(crit)
+        {
+            DamageTextInstance = Instantiate(damageCritTextPrefab, transform);
+        }
+        else
+        {
+            DamageTextInstance = Instantiate(damageTextPrefab, transform);
+        }
+        TextMeshPro damageText = DamageTextInstance.transform.GetChild(0).GetComponent<TextMeshPro>();
+        damageText.SetText(damage.ToString());
     }
 
     public void DisplayMoneyPickup(Vector3 position, float value)
@@ -46,5 +72,20 @@ public class UIManager : MonoBehaviour
         GameObject HealthTextInstance = Instantiate(healthTextPrefab);
         HealthTextInstance.transform.GetChild(0).GetComponent<TextMeshPro>().SetText("+ " + value.ToString());
         HealthTextInstance.transform.position = position;
+    }
+
+    public void moveHealthSlider(float currentHealth, float maxHealth)
+    {
+
+    }
+
+    public void setMaxHealthText()
+    {
+
+    }
+
+    public void setMoneyText(float value)
+    {
+        moneyText.SetText(value.ToString());
     }
 }

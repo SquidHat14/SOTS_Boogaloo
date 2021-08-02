@@ -25,6 +25,8 @@ public class InventoryManager : MonoBehaviour
     public void addMoney(int value)
     {
         money += value;
+        money = money < 0 ? 0 : money;
+        UIManager.Instance.setMoneyText(money);
     }
 
     public int getMoney()

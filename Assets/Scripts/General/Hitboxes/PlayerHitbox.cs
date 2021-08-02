@@ -12,9 +12,10 @@ public class PlayerHitbox : GeneralHitbox
     {
         if(CheckIfHittable(col))
         {
-            col.GetComponent<GeneralHurtbox>().GetHit(characterAttack.damage, collider.bounds.center.x);
+            bool crit = Random.value * 100 <= characterAttack.weapon.critChance;
+            WeaponAttack currentAttack = characterAttack.getAttack();
+            col.GetComponent<GeneralHurtbox>().GetHit(currentAttack.damage * (crit == true ? characterAttack.weapon.critMultiplier : 1), collider.bounds.center.x, currentAttack.knockbackAngle, currentAttack.knockbackSpeed, crit);
         }
-
         hitCols.Add(col);
     }
 }

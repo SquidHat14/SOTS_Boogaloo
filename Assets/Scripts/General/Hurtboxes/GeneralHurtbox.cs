@@ -7,8 +7,6 @@ public class GeneralHurtbox : MonoBehaviour
     protected BoxCollider2D collider;
     public bool Knockbackable = false;
 
-    public float KnockBackSpeed = 3f;
-
     public GameObject rootObject;
 
     protected bool Unhittable = false;
@@ -19,20 +17,23 @@ public class GeneralHurtbox : MonoBehaviour
 
     private Rigidbody2D rigidbody2D;
 
+    private PhysicsController controller;
+
     protected void Setup()
     {
         collider = GetComponent<BoxCollider2D>();
         animate = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         rigidbody2D = GetComponent<Rigidbody2D>();
+        controller = GetComponent<PhysicsController>();
     }
 
-    public virtual void GetHit(float damage, float hitPositionX, float KbSpeed = 0, bool crit = false)
+    public virtual void GetHit(float damage, float hitPositionX, Vector2 knockbackAngle, float KbSpeed, bool crit)
     {
         if(Knockbackable)
         {
             float hitDirection = collider.bounds.center.x > hitPositionX ? 1 : -1;
-            Knockback(hitDirection, KbSpeed == 0 ? KnockBackSpeed : KbSpeed);
+            Knockback(hitDirection, knockbackAngle, KbSpeed);
         }
 
         if(!Unhittable)
@@ -73,11 +74,16 @@ public class GeneralHurtbox : MonoBehaviour
         //WILL CALL DESTROY AT END OF ANIMATION IF SETUP CORRECTLY
     }
 
-    protected virtual void Knockback(float direction, float speed)
+    protected virtual void Knockback(float direction, Vector2 knockbackAngle, float speed)
     {
-        Debug.Log("HITTING KNOCKBACK ON SOMETHING");
-        rigidbody2D.velocity += new Vector2(direction * speed, speed / 4);
-        Invoke("resetRBVelocity", .15f);
+        try
+        {
+            //Apply the knockback to the controller
+        }
+        catch
+        {
+            Debug.Log("whatever is getting hit has knockback enabled but no physics controller!");
+        }
     }
 
     private void resetRBVelocity()
@@ -107,7 +113,6 @@ public class GeneralHurtbox : MonoBehaviour
         {
             TempC.a -= (0.01f * speedFade);
             sprite.color = TempC;
-            Debug.Log("fading: " + sprite.color.a);
             yield return new WaitForSeconds(0.03f);
         }
         Destroy(rootObject);

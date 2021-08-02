@@ -54,7 +54,6 @@ public class AIMovement: MonoBehaviour {
 
   public void turnAround()
   {
-    Debug.Log("Turning Around Now");
     moveDirection *= -1;
     flipSprite(moveDirection);
   }

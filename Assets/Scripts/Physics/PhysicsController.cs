@@ -166,6 +166,13 @@ public class PhysicsController : RaycastController
 		collisions.fallingThroughPlatform = false;
 	}
 
+    public void ApplyKnockback(ref Vector2 move, Vector2 knockbackAngle, float knockbackDirection, float speed)
+    {
+        Debug.Log("Applied Knockback");
+
+        move += new Vector2(knockbackAngle.x * knockbackDirection * speed, knockbackAngle.y * speed);
+    }
+
 	public struct CollisionInfo
 	{
 		public bool above, below;

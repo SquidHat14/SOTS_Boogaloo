@@ -7,6 +7,8 @@ TagManager:
   - FallThroughPlatform
   - JumpThroughPlatform
   - JumpAndFallThroughPlatform
+  - HealthBar
+  - Money
   layers:
   - Default
   - TransparentFX

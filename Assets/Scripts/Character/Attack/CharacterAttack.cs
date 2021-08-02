@@ -3,13 +3,12 @@ using UnityEngine;
 public class CharacterAttack : MonoBehaviour
 {    
     private bool attackInput = false;
-
-    private bool acceptingAttackInput2 = false;
-    private bool attackInput2 = false;
-    public float damage = 10f;
     private Animator animate;
     public BoxCollider2D hitBox;
     private PlayerHitbox pHB;
+    private float damage;
+
+    public Weapon weapon;
 
     void Start()
     {
@@ -34,43 +33,25 @@ public class CharacterAttack : MonoBehaviour
 
     void Update()
     {
-        if(!attackInput && !attackInput2)
+        if(!attackInput)
         {
             attackInput = Input.GetKeyDown("j");
-        }
-
-        if(!attackInput && !attackInput2 && acceptingAttackInput2)
-        {
-            attackInput2 = Input.GetKeyDown("j");
         }
     }
 
     public void StartFirstAttack()
     {
-        acceptingAttackInput2 = false;
+        updateHitBoxDimensions(weapon.attacks[0].hitboxOffset, weapon.attacks[0].hitboxSize);
+
+        damage = weapon.attacks[0].damage;
+
+        animate.Play(weapon.attacks[0].animationClipName);
         attackInput = false;
-        animate.SetBool("Attacking", true);
-    }
-
-    public void LookForSecondAttackInput()
-    {
-        acceptingAttackInput2 = true;
-    }
-
-    public void StartSecondAttack()
-    {
-        if(!attackInput2) return;
-
-        animate.SetBool("Attack2", true);
-        //TO DO - Modify hitbox to make it larger and do more damage
-        attackInput2 = false;
-        acceptingAttackInput2 = false;
     }
 
      void AttackFinished(string animatorCondition)
     {
         DisableHitbox();
-        animate.SetBool(animatorCondition, false);
         pHB.AttackFinished();  //Clears list of hit targets so 1 attack cant hit multiple times on the same enemy
     }
 
@@ -82,5 +63,16 @@ public class CharacterAttack : MonoBehaviour
     void DisableHitbox()
     {
         hitBox.enabled = false;
+    }
+
+    void updateHitBoxDimensions(Vector2 offset, Vector2 size)
+    {
+        hitBox.size = size;
+        hitBox.offset = offset;
+    }
+
+    public WeaponAttack getAttack()
+    {
+        return weapon.attacks[0];
     }
 }
