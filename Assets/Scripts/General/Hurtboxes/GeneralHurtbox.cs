@@ -5,27 +5,23 @@ using UnityEngine;
 public class GeneralHurtbox : MonoBehaviour
 {
     protected BoxCollider2D collider;
-    public bool Knockbackable = false;
-
     public GameObject rootObject;
-
-    protected bool Unhittable = false;
-
     public Animator animate;
-
     private SpriteRenderer sprite;
-
-    private Rigidbody2D rigidbody2D;
-
     private PhysicsController controller;
+
+    private Knockback kbController;
+
+    public bool Knockbackable = false;
+    protected bool Unhittable = false;
 
     protected void Setup()
     {
         collider = GetComponent<BoxCollider2D>();
         animate = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-        rigidbody2D = GetComponent<Rigidbody2D>();
         controller = GetComponent<PhysicsController>();
+        kbController = GetComponent<Knockback>();
     }
 
     public virtual void GetHit(float damage, float hitPositionX, Vector2 knockbackAngle, float KbSpeed, bool crit)
@@ -33,7 +29,7 @@ public class GeneralHurtbox : MonoBehaviour
         if(Knockbackable)
         {
             float hitDirection = collider.bounds.center.x > hitPositionX ? 1 : -1;
-            Knockback(hitDirection, knockbackAngle, KbSpeed);
+            kbController.ApplyKnockBack(hitDirection, knockbackAngle, KbSpeed);
         }
 
         if(!Unhittable)
@@ -74,22 +70,6 @@ public class GeneralHurtbox : MonoBehaviour
         //WILL CALL DESTROY AT END OF ANIMATION IF SETUP CORRECTLY
     }
 
-    protected virtual void Knockback(float direction, Vector2 knockbackAngle, float speed)
-    {
-        try
-        {
-            //Apply the knockback to the controller
-        }
-        catch
-        {
-            Debug.Log("whatever is getting hit has knockback enabled but no physics controller!");
-        }
-    }
-
-    private void resetRBVelocity()
-    {
-        rigidbody2D.velocity = new Vector2(0,0);
-    }
     private void finishHitAnimation()
     {
         animate.ResetTrigger("GotHit");
