@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/TestSceneMemoryLeak.unity
+    guid: 711c9c4a79866544cb44b51c4a277d53
   m_configObjects: {}
